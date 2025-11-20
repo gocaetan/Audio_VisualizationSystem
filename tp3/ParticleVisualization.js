@@ -8,6 +8,11 @@ export default class ParticleVisualization extends AudioVisualization {
     this.particles = [];
     this.lastTime = 0;
 
+	this.properties = {
+      numberOfParticles: 50,
+      ParticleSize: 2,
+	  ParticlesLigation: false
+    };
     // Inicializar partículas
     this.initParticles();
   }
@@ -32,20 +37,19 @@ export default class ParticleVisualization extends AudioVisualization {
 
   initParticles() {
     // TODO: inicializar partículas
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < this.properties.numberOfParticles; i++) {
       this.particles.push({
         x: Math.random() * this.canvas.width,
         y: Math.random() * this.canvas.height,
         vx: (Math.random() - 0.5) * 2,
         vy: (Math.random() - 0.5) * 2,
-        radius: Math.random() * 3 + 1,
+        radius: this.properties.ParticleSize,
         color: `hsl(${Math.random() * 360}, 100%, 50%)`,
       });
     }
   }
 
   updateParticles() {
-    // TODO: atualizar estado das partículas
     const data = this.audioProcessor
       ? this.audioProcessor.getFrequencyData()
       : this.testData;
@@ -83,6 +87,18 @@ export default class ParticleVisualization extends AudioVisualization {
     }
   }
 
+  updateProperty(property, value)
+  {
+	super.updateProperty(property, value);
+
+	if(property == "numberOfParticles")
+	{
+		this.particles = [];
+		this.initParticles();
+	}
+	else if(property == "ParticleSize")
+		this.particles.forEach(p => p.radius = value);
+  }
   drawParticles() {
     // TODO: desenhar partículas
     for (const p of this.particles) {
@@ -95,6 +111,8 @@ export default class ParticleVisualization extends AudioVisualization {
 
   drawConnections() {
     // TODO: desenhar conexões entre partículas
+	if(!this.properties.ParticlesLigation)
+		return;
     const maxDistance = 100;
 
     for (let i = 0; i < this.particles.length; i++) {

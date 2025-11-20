@@ -64,12 +64,18 @@ export default class UIManager {
                 input = document.createElement("input");
                 input.type = "range";
                 input.min = 0;
-                input.max = 255;
+                input.max = 100;
                 input.value = value;
             } else if (typeof value === "string" && value.startsWith("#")) {
                 input = document.createElement("input");
                 input.type = "color";
                 input.value = value;
+			}
+			else if(typeof value === "boolean")
+			{
+				input = document.createElement("input");
+				input.type = "checkbox";
+				input.checked = value;
             } else {
                 input = document.createElement("input");
                 input.type = "text";
@@ -78,10 +84,15 @@ export default class UIManager {
 
             input.id = `prop-${key}`;
             input.addEventListener("input", (e) => {
-                const val = e.target.type === "range" ? Number(e.target.value) : e.target.value;
+				let val;
+				if(e.target.type === "range")
+					val = Number(e.target.value);
+				else if(e.target.type === "checkbox")
+					val = e.target.checked;
+				else
+					val = e.target.value;
                 this.app.visualizationEngine.updateVisualizationProperty(key, val);
             });
-
             wrapper.appendChild(label);
             wrapper.appendChild(input);
             this.propertiesContainer.appendChild(wrapper);
