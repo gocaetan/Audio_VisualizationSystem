@@ -59,7 +59,7 @@ export default class ParticleVisualization extends AudioVisualization {
 
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
-
+	  p.radius = this.properties.ParticleSize * (1 + audioLevel * 2);
       // Mover partícula
       p.x += p.vx;
       p.y += p.vy;

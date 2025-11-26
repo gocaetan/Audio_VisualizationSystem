@@ -129,7 +129,6 @@ class AudioProcessor {
     if (this.audioContext && this.audioContext.state === "running") {
       this.audioContext.suspend();
     }
-
     console.log("Processamento de áudio parado.");
   }
 // ler os  dados de áudio em tempo real

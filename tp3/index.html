@@ -4,65 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Visualização de Áudio</title>
+
+    <!-- FontAwesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <link rel="stylesheet" href="styles.css">
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div id="app">
         <header>
-            <h1>Sistema de Visualização de Áudio</h1>
+            <h1><i class="fa-solid fa-wave-square"></i> Sistema de Visualização de Áudio</h1>
         </header>
         
         <main>
+            <!-- CONTROLOS -->
             <section id="controls">
                 <div class="control-group">
-                    <h3>Controlos de Áudio</h3>
-                    <button id="btnMicrophone" class="btn-primary">Iniciar Microfone</button>
-                    <button id="btnStop" class="btn-secondary" disabled>Parar Áudio</button>
-                    <input type="file" id="btnLoadFile" accept="audio/*">
+                    <h3><i class="fa-solid fa-microphone-lines"></i> Audio</h3>
+
+                    <button id="btnMicrophone" class="btn-primary">
+                        <i class="fa-solid fa-microphone"></i> Iniciar Microfone
+                    </button>
+
+                    <button id="btnStop" class="btn-secondary" disabled>
+                        <i class="fa-solid fa-stop"></i> Parar
+                    </button>
+
+                    <label class="file-upload">
+                        <i class="fa-solid fa-file-audio"></i> Carregar Ficheiro
+                        <input type="file" id="btnLoadFile" accept="audio/*">
+                    </label>
                 </div>
                 
                 <div class="control-group">
-                    <h3>Visualização</h3>
+                    <h3><i class="fa-solid fa-eye"></i> Visualização</h3>
                     <select id="selectVisualization">
-                        <option value="spectrum">Espectro de Frequências</option>
-                        <option value="waveform">Forma de Onda</option>
-                        <option value="particles">Partículas</option>
+                        <option value="spectrum">🎚️ Espectro de Frequências</option>
+                        <option value="waveform">📈 Forma de Onda</option>
+                        <option value="particles">✨ Partículas</option>
                     </select>
                 </div>
                 
                 <div class="control-group">
-                    <h3>Exportação</h3>
-                    <button id="exportPNG" class="btn-primary">Exportar PNG</button>
-                    <button id="exportJPEG" class="btn-primary">Exportar JPEG</button>
+                    <h3><i class="fa-solid fa-download"></i> Exportar</h3>
+
+                    <button id="exportPNG" class="btn-primary">
+                        <i class="fa-solid fa-image"></i> PNG
+                    </button>
+
+                    <button id="exportJPEG" class="btn-primary">
+                        <i class="fa-solid fa-file-image"></i> JPEG
+                    </button>
                 </div>
             </section>
             
+            <!-- CANVAS -->
             <section id="visualization-area">
                 <canvas id="audioCanvas"></canvas>
+
                 <div id="audioInfo">
-                    <p id="audioStatus">Áudio: Parado</p>
+                    <p id="audioStatus"><i class="fa-solid fa-circle-stop"></i> Áudio parado</p>
                     <p id="audioLevel">Nível: 0%</p>
                 </div>
             </section>
             
+            <!-- PROPRIEDADES DINÂMICAS -->
             <section id="properties-panel">
-                <h3>Propriedades da Visualização</h3>
-                <div id="properties-container">
-                    <!-- Propriedades dinâmicas serão inseridas aqui -->
-                </div>
+                <h3><i class="fa-solid fa-sliders"></i> Propriedades</h3>
+                <div id="properties-container"></div>
             </section>
         </main>
         
+        <!-- MODAL ERROS -->
         <div id="errorModal" class="modal hidden">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h3>Erro</h3>
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Erro</h3>
                 <p id="errorMessage"></p>
             </div>
         </div>
     </div>
-    
+
     <script type="module" src="./app.js"></script>
 </body>
 </html>

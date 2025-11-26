@@ -5,8 +5,6 @@ export default class SpectrumVisualization extends AudioVisualization {
   constructor(canvas, audioProcessor) {
     super(canvas, audioProcessor);
     this.name = "Espectro de Frequências";
-    // Inicializar propriedades específicas
-    // 👇 Propriedades configuráveis em tempo real
     this.properties = {
       color: "#00ffcc",
       barWidth: 3,

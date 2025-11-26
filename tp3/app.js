@@ -83,7 +83,6 @@ export default class App {
   exportFrame() {
     this.exportManager.exportAsPNG();
   }
-
   destroy() {
     this.stopAudio();
     cancelAnimationFrame(this.visualizationEngine.animationId);
